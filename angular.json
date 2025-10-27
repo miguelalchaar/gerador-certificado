@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gwerador-certificado": {
+    "gerador-certificado": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/gerador-certificado",
+            "index": "src/index.html",
             "browser": "src/main.ts",
+
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -22,7 +25,10 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css",
+              "https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css"
             ]
           },
           "configurations": {
@@ -53,10 +59,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "gwerador-certificado:build:production"
+              "buildTarget": "gerador-certificado:build:production"
             },
             "development": {
-              "buildTarget": "gwerador-certificado:build:development"
+              "buildTarget": "gerador-certificado:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,12 +80,13 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "998f7eef-5c4b-4174-b0de-4cce228f1047"
   }
 }
