@@ -1,1 +1,4 @@
-<button class="custom-botton">Botão primário</button>
+<!-- prettier-ignore -->
+<button [ngStyle]="disabled ? {'opacity': '50%'} : {}" class="custom-botton">
+  {{ textoBotao }}
+</button>
