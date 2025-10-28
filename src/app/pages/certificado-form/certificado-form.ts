@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { PrimaryButton } from '../../_components/primary-button/primary-button';
 import { SecondaryButton } from '../../_components/secondary-button/secondary-button';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { NgStyle } from '@angular/common';
-import { Certificado } from '../../interfaces/certificado';
-import { Certifificado } from '../../_services/certifificado';
+import { CertificadoInterface } from '../../interfaces/certificado';
+import { CertificadoService } from '../../_services/certificado';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-certificado-form',
@@ -13,9 +14,12 @@ import { Certifificado } from '../../_services/certifificado';
   styleUrl: './certificado-form.css',
 })
 export class CertificadoForm {
-  constructor(private cerificadoService: Certifificado) {}
+  constructor(private certificadService: CertificadoService) {}
 
-  certificado: Certificado = {
+  @ViewChild('form') form!: NgForm;
+
+  certificado: CertificadoInterface = {
+    id: '',
     atividades: [],
     nome: '',
     dataEmissao: '',
@@ -31,6 +35,9 @@ export class CertificadoForm {
   }
 
   adicionarAtividade() {
+    if (this.atividade.length == 0) {
+      return;
+    }
     this.certificado.atividades.push(this.atividade);
     this.atividade = '';
   }
@@ -44,7 +51,11 @@ export class CertificadoForm {
       return;
     }
     this.certificado.dataEmissao = this.dataAtual();
-    this.cerificadoService.adicionarCertificado(this.certificado);
+    this.certificado.id = uuidv4();
+    this.certificadService.adicionarCertificado(this.certificado);
+
+    this.certificado = this.estadoInicialCertificado();
+    this.form.resetForm();
   }
 
   dataAtual() {
@@ -55,5 +66,14 @@ export class CertificadoForm {
 
     const dataFormatada = `${dia}/${mes}/${ano}`;
     return dataFormatada;
+  }
+
+  estadoInicialCertificado(): CertificadoInterface {
+    return {
+      id: '',
+      atividades: [],
+      nome: '',
+      dataEmissao: '',
+    };
   }
 }
