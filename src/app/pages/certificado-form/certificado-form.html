@@ -40,6 +40,7 @@
         />
       </div>
       <app-secondary-button
+        (click)="adicionarAtividade()"
         textoBotao="Adicionar"
         [disabled]="atividade.length == 0"
         phClass="ph ph-plus"
@@ -51,7 +52,7 @@
         @for (atividade of atividades; track $index) {
         <div class="item">
           <span class="item-text">{{ atividade }}</span>
-          <div class="remove-btn">
+          <div (click)="excluirAtividade($index)" class="remove-btn">
             <i class="ph ph-x remove-btn"></i>
           </div>
         </div>
