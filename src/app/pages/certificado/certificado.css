@@ -25,10 +25,10 @@
 
 .certificado {
   position: relative;
-  margin-top: 32px;
+  margin-top: 22px;
   background-image: url('../../../../public/certificate/certificate_BG.png');
   width: 800px;
-  height: 500px;
+  height: 520px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -38,7 +38,7 @@
 .conteudo-certificado {
   position: relative;
   width: 700px;
-  height: 470px;
+  height: 460px;
   background-color: #fff;
   border-radius: 8px;
 }
